@@ -8,25 +8,14 @@ Parse.Cloud.useMasterKey();
     var time = (days * 24 * 3600 * 1000);
     var expirationDate = new Date(today.getTime() - (time));
 
-var GameScore = Parse.Object.extend("Groups");
-var query = new Parse.Query(GameScore);
-query.find({
-  success: function(results) {
-    // Do something with the returned Parse.Object values
-    for (var i = 0; i < results.length; i++) {
-      var object = results[i];
-      object.destroy({
-        success: function(object) {
-          // The object was deleted from the Parse Cloud.
-        },
-        error: function(object, error) {
-          // The delete failed.
-          // error is a Parse.Error with an error code and message.
-        }
-      });
-    }
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
-  }
-});
+    var query = new Parse.Query('Groups');
+    query.lessThan('createdAt', expirationDate);
+    query.each(function(Groups) {
+        return post.destroy();
+    }).then(function() {
+        console.log("Delete job completed.");
+        status.success("Delete job completed.");
+    }, function(error) {
+        alert("Error: " + error.code + " " + error.message);
+        status.error("Error: " + error.code + " " + error.message);
+    });
