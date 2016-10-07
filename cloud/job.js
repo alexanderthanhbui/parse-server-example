@@ -9,7 +9,6 @@ Parse.Cloud.useMasterKey();
     var expirationDate = new Date(today.getTime() - (time));
 
     var query = new Parse.Query('Groups');
-    query.lessThan('createdAt', expirationDate);
     query.each(function(Groups) {
         return Groups.destroy();
     }).then(function() {
