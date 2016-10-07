@@ -4,7 +4,7 @@ Parse.initialize('blindbox', 'MrFF6pmuI0ibpUheixmd', 'n5e0v9u2DxjkLWPmgQP8');
 Parse.serverURL = 'http://blindbox.herokuapp.com/parse/';
 Parse.Cloud.useMasterKey();
 
-Parse.Cloud.job('deleteOldPosts', function(request, status) {
+//Parse.Cloud.job('deleteOldPosts', function(request, status) {
     // All access
     Parse.Cloud.useMasterKey();
 
@@ -24,4 +24,4 @@ Parse.Cloud.job('deleteOldPosts', function(request, status) {
         alert("Error: " + error.code + " " + error.message);
         status.error("Error: " + error.code + " " + error.message);
     });
-});
+//});
