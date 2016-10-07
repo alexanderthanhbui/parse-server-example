@@ -6,7 +6,7 @@ Parse.Cloud.useMasterKey();
 
 Parse.Cloud.job("deleteMessages", function(request, status) 
 
-var ts = Math.round(new Date().getTime() / 1000);
+var ts = Math.round(new Date().getTime() / 1000),
 var tsYesterday = ts - (24 * 3600);
 var dateYesterday = new Date(tsYesterday*1000);
 
