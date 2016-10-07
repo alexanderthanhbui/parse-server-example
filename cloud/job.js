@@ -10,7 +10,6 @@ Parse.Cloud.useMasterKey();
 
 var GameScore = Parse.Object.extend("Groups");
 var query = new Parse.Query(GameScore);
-query.lessThan("createdAt", expirationDate);
 query.find({
   success: function(results) {
     // Do something with the returned Parse.Object values
