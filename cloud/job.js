@@ -5,6 +5,8 @@ Parse.serverURL = 'http://blindbox.herokuapp.com/parse/';
 Parse.Cloud.useMasterKey();
 
 Parse.Cloud.job('deleteOldPosts', function(request, status) {
+    // All access
+    Parse.Cloud.useMasterKey();
 
     var today = new Date();
     var days = 1;
@@ -12,18 +14,14 @@ Parse.Cloud.job('deleteOldPosts', function(request, status) {
     var expirationDate = new Date(today.getTime() - (time));
 
     var query = new Parse.Query('Groups');
-        // All posts have more than 1 day
-        query.lessThan('createdAt', expirationDate);
-
-        query.find().then(function (posts) {
-            Parse.Object.destroyAll(posts, {
-                success: function() {
-                    status.success('All posts are removed.');
-                },
-                error: function(error) {
-                    status.error('Error, posts are not removed.');
-                }
-            });
-        }, function (error) {});
-
+    query.lessThan('createdAt', expirationDate);
+    query.each(function(Groups) {
+        return post.destroy();
+    }).then(function() {
+        console.log("Delete job completed.");
+        status.success("Delete job completed.");
+    }, function(error) {
+        alert("Error: " + error.code + " " + error.message);
+        status.error("Error: " + error.code + " " + error.message);
+    });
 });
