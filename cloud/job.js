@@ -1,9 +1,12 @@
 
-Parse.Cloud.job("deleteMessages", function(request, status) 
-
+var Parse = require('parse/node');
+Parse.initialize('blindbox', 'MrFF6pmuI0ibpUheixmd', 'n5e0v9u2DxjkLWPmgQP8');
+Parse.serverURL = 'http://blindbox.herokuapp.com/parse/';
 Parse.Cloud.useMasterKey();
 
- var ts = Math.round(new Date().getTime() / 1000);
+Parse.Cloud.job("deleteMessages", function(request, status) 
+
+var ts = Math.round(new Date().getTime() / 1000);
 var tsYesterday = ts - (24 * 3600);
 var dateYesterday = new Date(tsYesterday*1000);
 
