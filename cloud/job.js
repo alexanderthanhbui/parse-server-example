@@ -4,35 +4,26 @@ Parse.initialize('blindbox', 'MrFF6pmuI0ibpUheixmd', 'n5e0v9u2DxjkLWPmgQP8');
 Parse.serverURL = 'http://blindbox.herokuapp.com/parse/';
 Parse.Cloud.useMasterKey();
 
-Parse.Cloud.job("deleteMessages", function(request, status) 
+Parse.Cloud.job('deleteOldPosts', function(request, status) {
 
-var ts = Math.round(new Date().getTime() / 1000),
-var tsYesterday = ts - (24 * 3600);
-var dateYesterday = new Date(tsYesterday*1000);
+    var today = new Date();
+    var days = 1;
+    var time = (days * 24 * 3600 * 1000);
+    var expirationDate = new Date(today.getTime() - (time));
 
-var query = new Parse.Query("Groups");
+    var query = new Parse.Query('Groups');
+        // All posts have more than 1 day
+        query.lessThan('createdAt', expirationDate);
 
-query.lessThan("createdAt", dateYesterday);
-
-query.find({
-    success: function(result) {
-        for(var i=0; i<result.length; i++) {
-            result[i].destroy({
-                success: function(object) {
-                    status.success("Delete job completed");
-                    alert('Delete Successful');
+        query.find().then(function (posts) {
+            Parse.Object.destroyAll(posts, {
+                success: function() {
+                    status.success('All posts are removed.');
                 },
-                error: function(object, error) {
-                    status.error("Delete error :" + error);
-                    alert('Delete failed');
+                error: function(error) {
+                    status.error('Error, posts are not removed.');
                 }
             });
-        }
-        status.success("Delete job completed");
-    },
-    error: function(error) {
-        status.error("Error in delete query error: " + error);
-        alert('Error in delete query');
-    }
-});
+        }, function (error) {});
+
 });
