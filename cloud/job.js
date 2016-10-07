@@ -11,7 +11,7 @@ Parse.Cloud.useMasterKey();
     var query = new Parse.Query('Groups');
     query.lessThan('createdAt', expirationDate);
     query.each(function(Groups) {
-        return post.destroy();
+        return Groups.destroy();
     }).then(function() {
         console.log("Delete job completed.");
         status.success("Delete job completed.");
