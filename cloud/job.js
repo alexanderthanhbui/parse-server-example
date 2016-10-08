@@ -12,6 +12,7 @@ gameScore.set("playerName", "Sean Plott");
 gameScore.set("cheatMode", false);
 
 gameScore.save(null, {
+  useMasterKey: true,
   success: function(gameScore) {
     // Execute any logic that should take place after the object is saved.
     alert('New object created with objectId: ' + gameScore.id);
@@ -21,7 +22,6 @@ gameScore.save(null, {
     // error is a Parse.Error with an error code and message.
     alert('Failed to create new object, with error code: ' + error.message);
   }
-  gameScore.save(null,{useMasterKey: true});
 });
 }
 
