@@ -1,8 +1,7 @@
 
 var Parse = require('parse/node');
-Parse.initialize('blindbox','n5e0v9u2DxjkLWPmgQP8');
+Parse.initialize('blindbox');
 Parse.serverURL = 'http://blindbox.herokuapp.com/parse';
-Parse.Cloud.useMasterKey();
 
 function saveSomething(){
 var MyClass = Parse.Object.extend("MyClass");
