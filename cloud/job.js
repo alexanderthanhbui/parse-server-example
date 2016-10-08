@@ -15,7 +15,6 @@ myclass.save({
     error: function(place, error){
         console.log("Fail: " + error.message);
     }
-    useMasterKey: true
 });
 }
 
