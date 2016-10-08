@@ -21,8 +21,8 @@ gameScore.save(null, {
     // error is a Parse.Error with an error code and message.
     alert('Failed to create new object, with error code: ' + error.message);
   }
+  gameScore.save(null,{useMasterKey: true});
 });
-gameScore.save(null,{useMasterKey: true});
 }
 
 function sayHello() {
