@@ -16,6 +16,7 @@ gameScore.save(null, {
   success: function(gameScore) {
     // Execute any logic that should take place after the object is saved.
     alert('New object created with objectId: ' + gameScore.id);
+    gameScore.save(null, { useMasterKey: true });
   },
   error: function(gameScore, error) {
     // Execute any logic that should take place if the save fails.
