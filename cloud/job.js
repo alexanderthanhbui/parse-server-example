@@ -11,7 +11,8 @@ gameScore.set("score", 1337);
 gameScore.set("playerName", "Sean Plott");
 gameScore.set("cheatMode", false);
 
-gameScore.save(null, {
+gameScore.save(null,{useMasterKey: true} {  
+
   success: function(gameScore) {
     // Execute any logic that should take place after the object is saved.
     alert('New object created with objectId: ' + gameScore.id);
