@@ -4,6 +4,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var developPath = path.resolve(__dirname, 'pusherDev.p12');
 var distributePath = path.resolve(__dirname, 'pusher.p12');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
@@ -21,12 +22,12 @@ var api = new ParseServer({
   push: {
   ios: [
     {
-      pfx: 'pusherDev.12', // Dev PFX or P12
+      pfx: developPath, // Dev PFX or P12
       bundleId: 'com.animenim.Yipster',
       production: false // Dev
     },
     {
-      pfx: 'pusher.p12', // Prod PFX or P12
+      pfx: distributePath, // Prod PFX or P12
       passphrase: 'alexbui1', // optional password to your p12/PFX
       bundleId: 'com.animenim.Yipster',  
       production: true // Prod
