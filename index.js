@@ -23,7 +23,7 @@ var api = new ParseServer({
       pfx: distributePath,
       passphrase: 'alexbui1', // optional password to your p12/PFX
       bundleId: 'com.animenim.Yipster',
-      production: false
+      production: true
     }
   }
 });
