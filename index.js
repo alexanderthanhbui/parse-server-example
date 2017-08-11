@@ -20,7 +20,7 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://blindbox.herokuapp.com/parse',  // Don't forget to change to https if needed
   push: {
     ios: {
-      pfx: distributePath,
+      pfx: 'pusher.p12',
       passphrase: 'alexbui1', // optional password to your p12/PFX
       bundleId: 'com.animenim.Yipster',
       production: true
