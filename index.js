@@ -4,8 +4,6 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
-var developPath = path.resolve(__dirname, 'pusherDev.p12');
-var distributePath = path.resolve(__dirname, 'pusher.p12');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -18,22 +16,19 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'MrFF6pmuI0ibpUheixmd',
   masterKey: process.env.MASTER_KEY || 'n5e0v9u2DxjkLWPmgQP8', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://blindbox.herokuapp.com/parse',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'http://blindbox.herokuapp.com/parse', // Don't forget to change to https if needed
   push: {
-  ios: [
-    {
-      pfx: developPath, // Dev PFX or P12
+    ios: [{
+      pfx: __dirname + 'pusherDev.p12', // Dev PFX or P12
       bundleId: 'com.animenim.Yipster',
       production: false // Dev
-    },
-    {
-      pfx: distributePath, // Prod PFX or P12
+    }, {
+      pfx: __dirname + 'pusher.p12', // Prod PFX or P12
       passphrase: 'alexbui1', // optional password to your p12/PFX
-      bundleId: 'com.animenim.Yipster',  
+      bundleId: 'com.animenim.Yipster',
       production: true // Prod
-    }
-  ]
-}
+    }]
+  }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
@@ -62,8 +57,9 @@ app.get('/test', function(req, res) {
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
-    console.log('parse-server-example running on port ' + port + '.');
+  console.log('parse-server-example running on port ' + port + '.');
 });
 
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
+Contact GitHub API Training Shop Blog About© 2017 GitHub, Inc.Terms Privacy Security Status Help
