@@ -17,14 +17,6 @@ var api = new ParseServer({
   appId: process.env.APP_ID || 'MrFF6pmuI0ibpUheixmd',
   masterKey: process.env.MASTER_KEY || 'n5e0v9u2DxjkLWPmgQP8', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://blindbox.herokuapp.com/parse', // Don't forget to change to https if needed
-  push: {
-    ios: {
-      pfx: 'pusher.p12', // Prod PFX or P12
-      passphrase: 'alexbui1', // optional password to your p12/PFX
-      bundleId: 'com.animenim.Yipster',
-      production: true // Prod
-    }
-  }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
