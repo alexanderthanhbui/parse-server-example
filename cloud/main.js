@@ -7,7 +7,8 @@
   var data = params.data;
 
  // Set our query to target specific user 
-  var recipientUser = new Parse.Query(Parse.User.objectId);
+  var recipientUser = new Parse.Query(Parse.User);
+  recipientUser.equalTo("objectId", request.params.someKey);
 
 // Set our installation query
   var pushQuery = new Parse.Query(Parse.Installation);
